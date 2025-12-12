@@ -37,7 +37,7 @@ input_height = float(st.text_input('Digite o seu peso (em kg) e pressione ENTER 
 st.write('### Histórico Familiar')
 input_family_history = st.radio('Você possui alguma pessoa com obesidade na sua família?',['Sim','Não'], index=0)
 input_family_history_dict = {'Sim': 1, 'Não':0}
-input_family_history = input_family_history.get(input_family_history)
+input_family_history = input_family_history_dict.get(input_family_history)
 
 # Consumo Frequente de Alimentos com alta quantidade de calorias
 st.write('### Consumo frequente de alimentos com alta quantidade de calorias')
