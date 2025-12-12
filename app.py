@@ -7,3 +7,32 @@ import joblib
 from joblib import load
 
 
+############################# Streamlit ############################
+st.markdown('<style>div[role="listbox"] ul{background-color: #6e42ad}; </style>', unsafe_allow_html=True)
+
+st.markdown("<h1 style='text-align: center; '> Formulário para Avaliação de Obesidade</h1>", unsafe_allow_html = True)
+
+st.warning('Preencha o formulário com todos os seus dados pessoais e clique no botão **ENVIAR** no final da página.')
+
+# Gênero
+st.write('### Sexo Biológico')
+input_gender_male = st.selectbox('Qual é o seu sexo biológico?', 'Masculino', 'Feminino')
+input_gender_male_dict = {'Masculino': 1, 'Feminino':0}
+input_gender_male = input_gender_male_dict.get(input_gender_male)
+# Idade
+st.write('### Idade')
+input_age = float(st.slider('Qual é a sua idade', 18, 100))
+
+# Altura
+st.write('### Altura')
+input_height = float(st.text_input('Digite a sua altura (em metros) e pressione ENTER para confirmar. Exemplo: 1.89', 0))
+
+# Peso
+st.write('### Peso')
+input_height = float(st.text_input('Digite o seu peso (em kg) e pressione ENTER para confirmar. Exemplo: 90', 0))
+
+# Carro próprio
+st.write('### Histórico Familiar')
+input_family_history = st.radio('Você possui alguma pessoa com obesidade na sua família?',['Sim','Não'], index=0)
+input_family_history_dict = {'Sim': 1, 'Não':0}
+input_family_history = input_family_history.get(input_family_historyo)
