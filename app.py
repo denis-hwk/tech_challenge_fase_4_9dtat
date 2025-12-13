@@ -175,8 +175,7 @@ input_mtrans_dict = {'Carro': 'Automobile',
 input_mtrans = input_mtrans_dict.get(input_mtrans)
 
 # Lista de todas as variáveis: 
-novo_cliente = [0, # ID_Cliente
-                input_gender_male, # Gênero
+novo_cliente = [input_gender_male, # Gênero
                 input_age, # Idade
                 input_height, # Altura
                 input_weight, # Peso
