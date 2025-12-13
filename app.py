@@ -47,6 +47,6 @@ input_favc = input_favc_dict.get(input_favc)
 
 # Consumo de vegetais nas refeições
 st.write('### Consumo de vegetais nas refeições')
-input_favc = st.selectbox('Você consome vegetais com frequência?', ['Raramente', 'Às vezes', 'Sempre'])
+input_favc = st.radio('Você consome vegetais com frequência?', ['Raramente', 'Às vezes', 'Sempre'], index=0)
 input_favc_dict = {'Raramente': 1, 'Às vezes':2, 'Sempre': 3}
 input_favc = input_favc_dict.get(input_favc)
