@@ -30,7 +30,7 @@ input_age = float(st.slider('Qual é a sua idade?', 18, 100))
 
 # Altura (height)
 st.write('### Altura')
-input_height = float(st.text_input('Digite a sua altura (em metros) e pressione ENTER para confirmar. ', placeholder='Exemplo: 1.89'))
+input_height = float(st.text_input('Digite a sua altura (em metros) e pressione ENTER para confirmar. Exemplo: 1.89', value='0.00'))
 
 # Peso (weight)
 st.write('### Peso')
