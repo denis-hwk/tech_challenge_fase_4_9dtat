@@ -214,7 +214,7 @@ def pipeline_modelo(df):
       ('MinMaxScaling', MinMaxScalerFeatures()),
       ('OrdinalEncoding', OrdinalEncodingFeatures()),
       ('OneHotEncoding', OneHotEncodingFeatures())
-  ])
+      ])
 
   df_pipeline = pipeline.fit_transform(df)
   return df_pipeline
