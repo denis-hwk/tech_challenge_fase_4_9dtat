@@ -1,12 +1,15 @@
 #Importação das bibliotecas
 import streamlit as st 
 import pandas as pd
-import sklearn
+from utils import MinMaxScalerFeatures, OrdinalEncodingFeatures, OneHotEncodingFeatures
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 import joblib
 from joblib import load
+import time
 
+#carregando os dados 
+df_modelo = pd.read_csv('https://raw.githubusercontent.com/denis-hwk/tech_challenge_fase_4_9dtat/refs/heads/main/df_modelo.csv')
 
 ############################# Streamlit ############################
 st.markdown('<style>div[role="listbox"] ul{background-color: #6e42ad}; </style>', unsafe_allow_html=True)
@@ -191,3 +194,74 @@ novo_cliente = [0, # ID_Cliente
                 input_mtrans, # Meios de transporte habituais (MTRANS)
                 0 # target (Obesity)
                 ]
+
+# Separação das amostras de treino e teste
+def df_train_test_split(df, test_size):
+  seed = 1337
+  df_train, df_test = train_test_split(df_modelo, test_size=test_size, random_state=seed)
+  return df_train, df_test
+
+df_train, df_test = df_train_test_split(df_modelo, 0.2)
+
+# Consolidando dados do novo cliente
+novo_cliente_modelo = pd.DataFrame([novo_cliente], columns=df_test.columns)
+
+# Adicionando novo cliente ao dataframe dos dados de teste
+df_novo_cliente  = pd.concat([df_test, novo_cliente_modelo], ignore_index=True)
+
+# Pipeline do modelo
+def pipeline_modelo(df):
+  pipeline = Pipeline([
+      ('MinMaxScaling', MinMaxScalerFeatures()),
+      ('OrdinalEncoding', OrdinalEncodingFeatures()),
+      ('OneHotEncoding', OneHotEncodingFeatures())
+  ])
+
+  df_pipeline = pipeline.fit_transform(df)
+  return df_pipeline
+
+# Aplicando a pipeline aos dados
+df_novo_cliente = pipeline_modelo(df_novo_cliente)
+
+# Removendo a coluna target do teste
+previsao_novo_cliente = df_novo_cliente.drop(['Obesity'], axis=1)
+
+# Gerar previsão do modelo 
+if st.button('Enviar'):
+    # Criar a barra de progresso
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    
+    # Etapa 1: Carregando o modelo
+    status_text.text('Carregando modelo...')
+    progress_bar.progress(25)
+    model = joblib.load('modelo/random_forest_classifier.joblib')
+    
+    # Etapa 2: Preparando dados
+    status_text.text('Preparando dados para previsão...')
+    progress_bar.progress(50)
+    time.sleep(0.3)  # Pequena pausa para visualização
+    
+    # Etapa 3: Executando previsão
+    status_text.text('Executando modelo de previsão...')
+    progress_bar.progress(75)
+    final_pred = model.predict(previsao_novo_cliente)
+    
+    # Etapa 4: Finalizando
+    status_text.text('Finalizando...')
+    progress_bar.progress(100)
+    time.sleep(0.3)
+    
+    # Limpar a barra de progresso e texto de status
+    progress_bar.empty()
+    status_text.empty()
+    
+    # Mostrar resultado
+    if final_pred[-1] <= 1:
+       st.success('### Baixo risco do paciente possuir obesidade')
+
+    elif final_pred[-1] <= 3:
+       st.success('### Risco moderado do paciente possuir obesidade')
+
+    else:
+       st.error('### Alto risco do paciente possuir obesidade')
