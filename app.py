@@ -81,10 +81,10 @@ input_caec = st.radio('Você consome alimentos entre as refeições principais?'
                        'Às vezes', 
                        'Sempre'], 
                        index=0)
-input_caec_dict = {'Não': 'no',
-                   'Raramente': 'Sometimes', 
-                   'Às vezes': 'Frequently', 
-                   'Sempre': 'Always'}
+input_caec_dict = {'Não': 0,
+                   'Raramente': 1, 
+                   'Às vezes': 2, 
+                   'Sempre': 3}
 input_caec = input_caec_dict.get(input_caec)
 
 # Fumante (SMOKE)
