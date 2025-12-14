@@ -1,7 +1,7 @@
 #Importação das bibliotecas
 import streamlit as st 
 import pandas as pd
-from utils import MinMaxScalerFeatures, OrdinalEncodingFeatures, OneHotEncodingFeatures
+from utils import MinMaxScalerFeatures, OneHotEncodingFeatures
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 import joblib
