@@ -218,7 +218,11 @@ def pipeline_modelo(df):
   df_pipeline = pipeline.fit_transform(df)
   return df_pipeline
 
-# Aplicando a pipeline aos dados
+# Separando variáveis para treino do modelo
+train = pipeline_modelo(df_train)
+X_train, y_train = train.drop(['Obesity'], axis=1), train['Obesity']
+
+# Aplicando a pipeline aos dados de teste
 df_novo_cliente = pipeline_modelo(df_novo_cliente)
 
 # Removendo a coluna target do teste
@@ -234,6 +238,7 @@ if st.button('Enviar'):
     status_text.text('Carregando modelo...')
     progress_bar.progress(25)
     model = joblib.load('modelo/random_forest_classifier.joblib')
+    model.fit(X_train, y_train)
     
     # Etapa 2: Preparando dados
     status_text.text('Preparando dados para previsão...')
