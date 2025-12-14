@@ -2,23 +2,6 @@ import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, OrdinalEncoder
 
-class OrdinalEncodingFeatures(BaseEstimator, TransformerMixin):
-  def __init__(self, ordinal_features = ['CAEC', 'CALC']):
-    self.ordinal_features = ordinal_features
-
-  def fit(self, df):
-    return self
-
-  def transform(self, df):
-    if(set(self.ordinal_features).issubset(df.columns)):
-      ordinal_encoder = OrdinalEncoder()
-      df[self.ordinal_features] = ordinal_encoder.fit_transform(df[self.ordinal_features])
-      return df
-
-    else:
-      print('Uma ou mais features não estão no DataFrame')
-      return df
-    
 class OneHotEncodingFeatures(BaseEstimator, TransformerMixin):
   def __init__(self, one_hot_feature=['MTRANS']):
     self.one_hot_feature = one_hot_feature

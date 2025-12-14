@@ -212,7 +212,6 @@ df_novo_cliente  = pd.concat([df_test, novo_cliente_modelo], ignore_index=True)
 def pipeline_modelo(df):
   pipeline = Pipeline([
       ('MinMaxScaling', MinMaxScalerFeatures()),
-      ('OrdinalEncoding', OrdinalEncodingFeatures()),
       ('OneHotEncoding', OneHotEncodingFeatures())
       ])
 
