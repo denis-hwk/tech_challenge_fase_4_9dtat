@@ -1,5 +1,0 @@
-pandas
-matplotlib
-numpy
-requests
-plotly == 6.5.0
