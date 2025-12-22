@@ -102,70 +102,73 @@ st.markdown('<style>div[role="listbox"] ul{background-color: #6e42ad}; </style>'
 
 st.markdown("<h1 style='text-align: center; '> Dashboard para Análise de Dados sobre Obesidade </h1>", unsafe_allow_html = True)
 
+col1, col2 = st.columns(2, gap="small", vertical_alignment="top", border=False, width="stretch")
+
 ############################ Gráfico de Sexo Biológico ############################
-st.write('### Distribuição de Sexo Biológico')
+with col1:
+    st.write('### Distribuição de Sexo Biológico')
+    fig_gender = px.histogram(
+        df_modelo, 
+        x='Obesity', 
+        color='Gender', 
+        barmode='stack',
+        labels={
+            'Obesity': 'Nível de Obesidade',
+            'Gender': 'Gênero'
+            },
+        color_discrete_map={
+            'Masculino': 'lightseagreen', 
+            'Feminino': 'lightcoral'
+            },
+        category_orders={
+            "Obesity": ['Abaixo do peso',
+                        'Peso normal',
+                        'Sobrepeso',
+                        'Obesidade']
+            }
+        )
+    
+    fig_gender.update_layout(
+        xaxis_tickangle=-45,
+        yaxis_title='Quantidade de pessoas',
+        legend_title='Sexo biológico'
+        )
 
-fig_gender = px.histogram(
-    df_modelo, 
-    x='Obesity', 
-    color='Gender', 
-    barmode='stack',
-    labels={
-        'Obesity': 'Nível de Obesidade',
-        'Gender': 'Gênero'
-        },
-    color_discrete_map={
-        'Masculino': 'lightseagreen', 
-        'Feminino': 'lightcoral'
-        },
-    category_orders={
-        "Obesity": ['Abaixo do peso',
-                    'Peso normal',
-                    'Sobrepeso',
-                    'Obesidade']
-        }
-    )
-
-fig_gender.update_layout(
-    xaxis_tickangle=-45,
-    yaxis_title='Quantidade de pessoas',
-    legend_title='Sexo biológico'
-    )
-
-st.plotly_chart(fig_gender, use_container_width=True)
+    st.plotly_chart(fig_gender, use_container_width=True)
 
 ############################## Gráfico de Idade ##############################
-st.write('### Distribuição da Idade por Nível de Obesidade')
+with col2:
+    st.write('### Distribuição da Idade por Nível de Obesidade')
 
-fig_age = px.box(
-    df_modelo, 
-    y='Age',
-    color='Obesity',
-    labels={
-        'Age': 'Idade',
-        'Obesity': 'Nível de Obesidade'
-        },
-    color_discrete_map={
-        'Abaixo do peso': 'royalblue', 
-        'Peso normal': 'forestgreen',
-        'Sobrepeso': 'orange',
-        'Obesidade': 'orangered'
-        },
-    category_orders={
-        "Obesity": ['Abaixo do peso',
-                    'Peso normal',
-                    'Sobrepeso',
-                    'Obesidade']
-        }
-    )
+    fig_age = px.box(
+        df_modelo, 
+        y='Age',
+        color='Obesity',
+        labels={
+            'Age': 'Idade',
+            'Obesity': 'Nível de Obesidade'
+            },
+        color_discrete_map={
+            'Abaixo do peso': 'royalblue', 
+            'Peso normal': 'forestgreen',
+            'Sobrepeso': 'orange',
+            'Obesidade': 'orangered'
+            },
+        category_orders={
+            "Obesity": ['Abaixo do peso',
+                        'Peso normal',
+                        'Sobrepeso',
+                        'Obesidade']
+            }
+        )
 
-fig_age.update_layout(
-    xaxis_tickangle=-45,
-    yaxis_title='Quantidade de pessoas',
-    legend_title='Nível Obesidade'
-    )
+    fig_age.update_layout(
+        xaxis_tickangle=-45,
+        yaxis_title='Quantidade de pessoas',
+        legend_title='Nível Obesidade'
+        )
 
-st.plotly_chart(fig_age, use_container_width=True)
+    st.plotly_chart(fig_age, use_container_width=True)
 
 ############################## Gráfico de Peso ##############################
 st.write('### Distribuição do Peso por Nível de Obesidade')
