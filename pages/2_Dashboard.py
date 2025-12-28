@@ -271,7 +271,8 @@ with col31:
 
     fig_scatter_height_weight.update_layout(
         xaxis_tickangle=-45,
-        yaxis_title='Quantidade de pessoas',
+        xaxis_title='Altura',
+        yaxis_title='Peso',
         legend_title='Nível Obesidade'
         )
 
