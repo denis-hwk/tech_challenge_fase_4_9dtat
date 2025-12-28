@@ -71,7 +71,14 @@ input_fcvc = input_fcvc_dict.get(input_fcvc)
 
 # Quantidade de refeições po dia (NCP)
 st.write('### Quantidade de refeições diárias')
-input_ncp = float(st.slider('Quantas refeições diárias você faz?', 1, 6))
+input_ncp = st.radio('Quantas refeições diárias você faz?', 
+                      [1,
+                       2, 
+                       3, 
+                       4,
+                       5,
+                       6], 
+                       index=0)
 
 # Consumo de alimentos entre as refeições (CAEC)
 st.write('### Consumo de alimentos entre as refeições')
