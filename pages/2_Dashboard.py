@@ -285,6 +285,7 @@ with col32:
         x='Obesity', 
         color='family_history', 
         barmode='stack',
+        histnorm='percent',
         title='Distribuição de Pessoas por Histórico Familiar e Nível de Obesidade',
         labels={
             'Obesity': 'Nível de Obesidade',
