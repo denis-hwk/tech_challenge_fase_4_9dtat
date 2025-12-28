@@ -6,6 +6,8 @@ import plotly.express as px
 import warnings
 warnings.filterwarnings('ignore')
 
+st.set_page_config(layout="wide")
+
 url = 'https://raw.githubusercontent.com/denis-hwk/tech_challenge_fase_4_9dtat/refs/heads/main/Obesity.csv'
 df = pd.read_csv(url, delimiter = ',')
 
@@ -285,7 +287,6 @@ with col32:
         x='Obesity', 
         color='family_history', 
         barmode='stack',
-        histnorm='percent',
         title='Distribuição de Pessoas por Histórico Familiar e Nível de Obesidade',
         labels={
             'Obesity': 'Nível de Obesidade',
